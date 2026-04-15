@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 基础练习</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #2c3e50;
+            border-left: 4px solid #e74c3c;
+            padding-left: 10px;
+        }
+        .output {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Consolas", monospace;
+            margin-top: 10px;
+            white-space: pre-wrap;
+            min-height: 30px;
+        }
+        button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #c0392b;
+        }
+        code {
+            background: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Consolas", monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript 基础练习</h1>
+
+    <!-- 变量定义 -->
+    <div class="section">
+        <h2>1. 变量的定义</h2>
+        <p>JavaScript 中有三种变量声明方式：<code>var</code>、<code>let</code>、<code>const</code></p>
+        <button onclick="runVariableDemo()">运行示例</button>
+        <div class="output" id="varOutput"></div>
+    </div>
+
+    <!-- 变量类型 -->
+    <div class="section">
+        <h2>2. 变量类型</h2>
+        <p>JavaScript 基本数据类型：String、Number、Boolean、Null、Undefined、Object</p>
+        <button onclick="runTypeDemo()">运行示例</button>
+        <div class="output" id="typeOutput"></div>
+    </div>
+
+    <!-- 表达式 -->
+    <div class="section">
+        <h2>3. 表达式</h2>
+        <p>算术运算符、比较运算符、逻辑运算符、三元运算符</p>
+        <button onclick="runExpressionDemo()">运行示例</button>
+        <div class="output" id="exprOutput"></div>
+    </div>
+
+    <!-- 流程控制 -->
+    <div class="section">
+        <h2>4. 流程控制</h2>
+        <p>if-else、switch、for、while、do-while 循环</p>
+        <button onclick="runControlDemo()">运行示例</button>
+        <div class="output" id="controlOutput"></div>
+    </div>
+
+    <!-- 函数 -->
+    <div class="section">
+        <h2>5. 函数</h2>
+        <p>函数声明、函数表达式、箭头函数、闭包</p>
+        <button onclick="runFunctionDemo()">运行示例</button>
+        <div class="output" id="funcOutput"></div>
+    </div>
+
+    <script>
+        // ==================== 1. 变量定义 ====================
+        function runVariableDemo() {
+            let output = [];
+
+            // var - 函数作用域，可重复声明（已不推荐使用）
+            var oldStyle = "我是var声明的";
+            output.push("var: " + oldStyle);
+
+            // let - 块级作用域，不能重复声明
+            let newStyle = "我是let声明的";
+            output.push("let: " + newStyle);
+
+            // const - 常量，声明时必须赋值，之后不能重新赋值
+            const PI = 3.14159;
+            output.push("const: " + PI);
+
+            // 演示块级作用域
+            if (true) {
+                let blockVar = "我在if块里";
+                output.push("块级: " + blockVar);
+            }
+            // console.log(blockVar); // 错误：blockVar未定义（在块外访问）
+
+            // 输出到页面
+            document.getElementById("varOutput").textContent = output.join("\n");
+        }
+
+        // ==================== 2. 变量类型 ====================
+        function runTypeDemo() {
+            let output = [];
+
+            // String - 字符串
+            let str = "Hello JavaScript";
+            output.push("String: " + str + " (类型: " + typeof str + ")");
+
+            // Number - 数字（整数和浮点数）
+            let num = 42;
+            let floatNum = 3.14;
+            output.push("Number: " + num + " (类型: " + typeof num + ")");
+            output.push("Float: " + floatNum + " (类型: " + typeof floatNum + ")");
+
+            // Boolean - 布尔值
+            let isTrue = true;
+            let isFalse = false;
+            output.push("Boolean: " + isTrue + " / " + isFalse + " (类型: " + typeof isTrue + ")");
+
+            // Null - 空值
+            let empty = null;
+            output.push("Null: " + empty + " (类型: " + typeof empty + ")");
+
+            // Undefined - 未定义
+            let notDefined;
+            output.push("Undefined: " + notDefined + " (类型: " + typeof notDefined + ")");
+
+            // Object - 对象
+            let obj = { name: "张三", age: 25 };
+            output.push("Object: " + JSON.stringify(obj) + " (类型: " + typeof obj + ")");
+
+            // Array - 数组（特殊的Object）
+            let arr = [1, 2, 3, 4, 5];
+            output.push("Array: " + JSON.stringify(arr) + " (类型: " + typeof arr + ")");
+
+            document.getElementById("typeOutput").textContent = output.join("\n");
+        }
+
+        // ==================== 3. 表达式 ====================
+        function runExpressionDemo() {
+            let output = [];
+
+            // 算术表达式
+            let a = 10, b = 3;
+            output.push("算术运算符:");
+            output.push("  a + b = " + (a + b));
+            output.push("  a - b = " + (a - b));
+            output.push("  a * b = " + (a * b));
+            output.push("  a / b = " + (a / b));
+            output.push("  a % b = " + (a % b) + " (取余)");
+
+            // 比较表达式
+            output.push("\n比较运算符:");
+            output.push("  a == b: " + (a == b) + " (相等，不比较类型)");
+            output.push("  a === b: " + (a === b) + " (全等，比较类型)");
+            output.push("  a != b: " + (a != b));
+            output.push("  a > b: " + (a > b));
+
+            // 逻辑表达式
+            let x = true, y = false;
+            output.push("\n逻辑运算符:");
+            output.push("  x && y: " + (x && y) + " (且)");
+            output.push("  x || y: " + (x || y) + " (或)");
+            output.push("  !x: " + (!x) + " (非)");
+
+            // 三元运算符
+            let age = 20;
+            let canVote = age >= 18 ? "可以投票" : "不能投票";
+            output.push("\n三元运算符:");
+            output.push("  age >= 18 ? '可以投票' : '不能投票' => " + canVote);
+
+            // 类型转换表达式
+            output.push("\n类型转换:");
+            output.push("  '5' + 2 = " + ('5' + 2) + " (字符串拼接)");
+            output.push("  Number('5') + 2 = " + (Number('5') + 2) + " (转数字)");
+            output.push("  Boolean(1) = " + Boolean(1));
+            output.push("  Boolean(0) = " + Boolean(0));
+
+            document.getElementById("exprOutput").textContent = output.join("\n");
+        }
+
+        // ==================== 4. 流程控制 ====================
+        function runControlDemo() {
+            let output = [];
+
+            // if-else
+            output.push("if-else 语句:");
+            let score = 85;
+            if (score >= 90) {
+                output.push("  成绩等级: A");
+            } else if (score >= 80) {
+                output.push("  成绩等级: B");
+            } else if (score >= 70) {
+                output.push("  成绩等级: C");
+            } else {
+                output.push("  成绩等级: D");
+            }
+
+            // switch
+            output.push("\nswitch 语句:");
+            let day = 3;
+            switch (day) {
+                case 1: output.push("  今天是星期一"); break;
+                case 2: output.push("  今天是星期二"); break;
+                case 3: output.push("  今天是星期三"); break;
+                case 4: output.push("  今天是星期四"); break;
+                case 5: output.push("  今天是星期五"); break;
+                default: output.push("  今天是周末");
+            }
+
+            // for循环
+            output.push("\nfor 循环:");
+            let fruits = ["苹果", "香蕉", "橙子"];
+            for (let i = 0; i < fruits.length; i++) {
+                output.push("  第" + (i + 1) + "个水果: " + fruits[i]);
+            }
+
+            // for...of (遍历数组)
+            output.push("\nfor...of 循环:");
+            for (let fruit of fruits) {
+                output.push("  水果: " + fruit);
+            }
+
+            // for...in (遍历对象)
+            output.push("\nfor...in 循环:");
+            let person = { name: "李四", age: 30, city: "北京" };
+            for (let key in person) {
+                output.push("  " + key + ": " + person[key]);
+            }
+
+            // while循环
+            output.push("\nwhile 循环:");
+            let count = 0;
+            let whileResult = [];
+            while (count < 5) {
+                whileResult.push(count);
+                count++;
+            }
+            output.push("  0到4: " + whileResult.join(", "));
+
+            // do-while循环
+            output.push("\ndo-while 循环:");
+            let dwCount = 0;
+            let dwResult = [];
+            do {
+                dwResult.push(dwCount);
+                dwCount++;
+            } while (dwCount < 3);
+            output.push("  0到2: " + dwResult.join(", "));
+
+            // break和continue
+            output.push("\nbreak 和 continue:");
+            let breakDemo = [];
+            for (let i = 0; i < 10; i++) {
+                if (i === 3) continue; // 跳过i=3
+                if (i === 7) break;   // 遇到i=7退出循环
+                breakDemo.push(i);
+            }
+            output.push("  跳过3，遇到7停止: " + breakDemo.join(", "));
+
+            document.getElementById("controlOutput").textContent = output.join("\n");
+        }
+
+        // ==================== 5. 函数 ====================
+        function runFunctionDemo() {
+            let output = [];
+
+            // 函数声明
+            function greet(name) {
+                return "你好, " + name + "!";
+            }
+            output.push("函数声明: " + greet("世界"));
+
+            // 函数表达式
+            const square = function(x) {
+                return x * x;
+            };
+            output.push("函数表达式: 5的平方 = " + square(5));
+
+            // 箭头函数
+            const cube = (x) => x * x * x;
+            output.push("箭头函数: 3的立方 = " + cube(3));
+
+            // 箭头函数（多参数）
+            const max = (a, b) => a > b ? a : b;
+            output.push("箭头函数(多参数): max(3,8) = " + max(3, 8));
+
+            // 默认参数
+            const sayHello = (name = "访客") => "欢迎, " + name;
+            output.push("默认参数: " + sayHello());
+            output.push("默认参数: " + sayHello("小明"));
+
+            // arguments对象
+            function sumAll() {
+                let total = 0;
+                for (let i = 0; i < arguments.length; i++) {
+                    total += arguments[i];
+                }
+                return total;
+            }
+            output.push("arguments对象: sumAll(1,2,3,4,5) = " + sumAll(1, 2, 3, 4, 5));
+
+            // 闭包
+            output.push("\n闭包示例:");
+            function createCounter() {
+                let count = 0;
+                return function() {
+                    count++;
+                    return count;
+                };
+            }
+            let counter = createCounter();
+            output.push("  第一次调用: " + counter());
+            output.push("  第二次调用: " + counter());
+            output.push("  第三次调用: " + counter());
+
+            // 回调函数
+            output.push("\n回调函数:");
+            function processData(data, callback) {
+                return callback(data);
+            }
+            const result = processData(10, (x) => x * 2);
+            output.push("  processData(10, x => x*2) = " + result);
+
+            // IIFE (立即调用函数表达式)
+            output.push("\nIIFE:");
+            (function() {
+                output.push("  (function() { ... })() - 定义后立即执行");
+            })();
+
+            document.getElementById("funcOutput").textContent = output.join("\n");
+        }
+    </script>
+</body>
+</html>
